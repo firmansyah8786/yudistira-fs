@@ -42,9 +42,16 @@
                 </p>
             </div>
         </section>
+        <TopNav />
     </main>
 </template>
 <script>
+import TopNav from "./TopNav.vue";
+export default {
+    components: {
+        TopNav
+    }
+}
 </script>
 <style>
     .dark-bg{
@@ -84,8 +91,19 @@
     .links{
         height: 18vh;
     }
-    .text-block{
-        padding: 1rem 15% 0;
+    @media (max-width: 799px) {
+        .text-block{
+            padding: 1rem 10% 0;
+        }
     }
-
+    @media (min-width:800px) and (max-width: 1199px) {
+        .text-block{
+            padding: 1rem 15% 0;
+        }
+    }
+    @media (min-width: 1200px) {
+        .text-block{
+            padding: 1rem 20% 0;
+        }
+    }
 </style>
