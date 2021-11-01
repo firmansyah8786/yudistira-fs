@@ -22,6 +22,20 @@
                 </p>
             </div>
         </section>
+        <section class="dark-bg">
+            <div class="text-block">
+                <h1 class="text-center mb-3">APIs</h1>
+                <p>
+                    My experience with APIs is varied. I have created many kind of APIs. Ranging from simple CRUD API for data management, to a more complex API that use third party APIs. So, I can deliver an API that matches the need of the job or the given criteria.
+                </p>
+                <p>
+                    Most of the APIs I made before was in <strong>PHP</strong> using <strong>Laravel</strong> framework. Some of third party APIs I've used before are courier tracking API <strong>Rajaongkir</strong> and <strong>Wix API</strong> for OAuth 2.0 and product management. It took me a little time to learn about those APIs. I am confident I can do third party API integration when needed.
+                </p>
+                <p>
+                    
+                </p>
+            </div>
+        </section>
         <TopNav />
     </main>
 </template>

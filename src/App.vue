@@ -27,17 +27,17 @@
     }
     @media (max-width: 799px) {
         .text-block{
-            padding: 1rem 10% 0;
+            padding: 1rem 10% 1rem;
         }
     }
     @media (min-width:800px) and (max-width: 1199px) {
         .text-block{
-            padding: 1rem 15% 0;
+            padding: 1rem 15% 1rem;
         }
     }
     @media (min-width: 1200px) {
         .text-block{
-            padding: 1rem 20% 0;
+            padding: 1rem 20% 1rem;
         }
     }
 </style>
