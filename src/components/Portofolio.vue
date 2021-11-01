@@ -13,7 +13,7 @@
                     <NavLinks />
                 </nav>
                 <div class="responsive logo mb-2 mt-2">
-                    <img alt="YFS logo" src="../assets/logo yfs.svg" />
+                    <img alt="YFS logo" src="../assets/logo.svg" />
                 </div>
                 <SocialLinks additionalClass="white-icon" />
                 <div class="pt-3 pb-3">
