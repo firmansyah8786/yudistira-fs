@@ -38,4 +38,7 @@
     .white-icon .social-icon{
         color: #F1FAEE!important;
     }
+    .light-icon .social-icon{
+        color: #A8DADC!important;
+    }
 </style>

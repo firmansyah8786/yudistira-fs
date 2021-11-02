@@ -1,6 +1,6 @@
 <template>
     <router-link to="/" class="nav-links" tag="a"><strong>Home</strong></router-link>
-    <router-link to="/" class="nav-links" tag="a"><strong>Contact</strong></router-link>
+    <router-link to="/#skills" class="nav-links" tag="a"><strong>Skills</strong></router-link>
     <router-link to="/portofolio" class="nav-links" tag="a"><strong>Portofolio</strong></router-link>
 </template>
 <script>
