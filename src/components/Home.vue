@@ -31,10 +31,52 @@
                 <p>
                     Most of the APIs I made before was in <strong>PHP</strong> using <strong>Laravel</strong> framework. Some of third party APIs I've used before are courier tracking API <strong>Rajaongkir</strong> and <strong>Wix API</strong> for OAuth 2.0 and product management. It took me a little time to learn about those APIs. I am confident I can do third party API integration when needed.
                 </p>
-                <p>
-                    
-                </p>
             </div>
+        </section>
+        <section class="light-bg">
+            <div class="text-block">
+                <h1 id="skills" class="text-center mb-3">Skills</h1>
+                <div class="wrap justify-content-center">
+                    <div class="skill">
+                        <img class="skill-item" src="/img/php.png" alt="php">
+                        PHP
+                    </div>
+                    <div class="skill">
+                        <img class="skill-item" src="/img/laravel.png" alt="laravel">
+                        Laravel
+                    </div>
+                    <div class="skill">
+                        <img class="skill-item" src="/img/html5.png" alt="html5">
+                        HTML
+                    </div>
+                    <div class="skill">
+                        <img class="skill-item" src="/img/javascript.png" alt="javascript">
+                        JavaScript
+                    </div>
+                    <div class="skill">
+                        <img class="skill-item" src="/img/css.png" alt="css">
+                        CSS
+                    </div>
+                    <div class="skill">
+                        <img class="skill-item" src="/img/bootstrap.png" alt="bootstrap">
+                        Bootstrap
+                    </div>
+                    <div class="skill">
+                        <img class="skill-item" src="/img/jquery.png" alt="jquery">
+                        jQuery
+                    </div>
+                    <div class="skill">
+                        <img class="skill-item" src="/img/git.png" alt="git">
+                        Git
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="dark-bg">
+            <div class="d-flex justify-content-center pt-4">
+                <h4>Contact me :</h4>
+            </div>
+            <SocialLinks additionalClass="links light-icon" />
         </section>
         <TopNav />
     </main>
@@ -60,5 +102,19 @@ export default {
     }
     .links{
         height: 18vh;
+    }
+    .skill-item{
+        width: 100%;
+        height: auto;
+    }
+    .skill{
+        flex: 1;
+        flex-basis: 23%;
+        margin: 5px;
+        max-width: 23%;
+        padding: 1rem;
+        align-self: center;
+        text-align: center;
+        font-weight: bold;
     }
 </style>
