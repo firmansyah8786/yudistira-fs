@@ -73,10 +73,13 @@
             </div>
         </section>
         <section class="dark-bg">
-            <div class="d-flex justify-content-center pt-4">
+            <div class="justify-center pt-4">
                 <h4>Contact me :</h4>
             </div>
             <SocialLinks additionalClass="links light-icon" />
+            <div class="justify-center p-3">
+                <span class="back-to-top badge rounded-pill" @click.prevent="scrollToTop">^</span>
+            </div>
         </section>
         <TopNav />
     </main>
@@ -88,6 +91,11 @@ export default {
     components: {
         TopNav,
         SocialLinks
+    },
+    methods: { 
+        scrollToTop() {
+            window.scrollTo(0,0);
+        }
     }
 }
 </script>
@@ -116,5 +124,12 @@ export default {
         align-self: center;
         text-align: center;
         font-weight: bold;
+    }
+    .back-to-top{
+        font-weight: bolder;
+        font-size: 1.5rem;
+        background-color: #E63946;
+        color: #F1FAEE;
+        cursor: pointer;
     }
 </style>
