@@ -102,17 +102,17 @@
                                 </div>
                             </div>
                             <div class="portofolio-text">
-                                <p>The Edge Singapore is a product owned by someone in Edgeprop.sg at the time I was there. The Edge Singapore, TES for short, is an news publication website. There is also a mobile app version of it. It uses drupal as its Content Management System. It uses module feature, which is like wordpress plugin, to customize the website as desired. My job usually takes place around making or modifying custom module to add more feature in the website such as creating a custom import function.</p>
+                                <p>This is a freelance job I got to integrate Wix API to the user's website. The user want to be able to manage his products in his own database and wixsite from one place. Wix API uses OAuth 2.0 as authentication for the APIs. The website itself uses native PHP.</p>
                                 <p>
-                                    <strong>Role :</strong> Backend engineer
+                                    <strong>Role :</strong> Full-stack Developer
                                     <br>
-                                    <strong>Responsibilities :</strong> Maintain the main website’s system to be free of bugs. Add more features to the website as requested. Participate in development and maintenance for company web application using drupal.
+                                    <strong>Responsibilities :</strong> Integrate Wix API with the website.
                                     <br>
                                     <strong>Languages :</strong> PHP.
                                     <br>
                                     <strong>Frameworks/Libs :</strong> Wix API, Guzzle.
                                     <br>
-                                    <strong>Other technologies :</strong> MySql.
+                                    <strong>Other technologies :</strong> MySql, OAtuh 2.0
                                     <br>
                                     <strong>Status :</strong> Is online. Private wix app.
                                     <br>
