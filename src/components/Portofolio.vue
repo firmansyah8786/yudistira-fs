@@ -26,100 +26,80 @@
                         <h1>Companies Projects</h1>
                         <hr>
                     </div>
-                    <div class="mb-4">
-                        <h2 class="heading">PT. Onklas Prima Indonesia</h2>
-                        <hr>
-                        <div class="responsive-flex p-3">
-                            <div class="portofolio-img">
-                                <img src="/img/onklas.jpg" alt="onklas" @click="toggleModal">
-                                <div class="text-center mt-4 mb-4">
-                                    <h5>* Internal project. Under the NDA</h5>
+                    <template v-if="dataReceived">
+                        <div v-for="portofolio in company_portofolios" :key="portofolio.id" class="mb-4">
+                            <h2 class="heading">{{ portofolio.title }}</h2>
+                            <hr>
+                            <div class="responsive-flex p-3">
+                                <div class="portofolio-img">
+                                    <template v-if="portofolio.portofolio_images.length">
+                                        <img :src="portofolio.portofolio_images[0].image_url" alt="{{portofolio.alt}}" @click="toggleModal">
+                                    </template>
+                                    <div class="gallery mt-3">
+                                        <template v-for="(image,key,data_index) in portofolio.portofolio_images" :key="data_index">
+                                            <img v-if="image.index > 1" class="image-popup" :src="image.image_url" :alt="image.alt" @click="toggleModal">
+                                        </template>
+                                    </div>
+                                    <div v-if="portofolio.nda" class="text-center mt-4 mb-4">
+                                        <h5>* Internal project. Under the NDA</h5>
+                                    </div>
+                                </div>
+                                <div class="portofolio-text">
+                                    <p>{{portofolio.description}}</p>
+                                    <p>
+                                        <span v-for="(detail_item,detail_key,detail_index) in portofolio.detail" :key="detail_index">
+                                            <strong>{{detail_key}} :</strong> <a target="_blank" v-if="detail_key=='Link'" :href="detail_item">{{detail_item}}</a> <span v-else>{{detail_item}}</span>
+                                            <br>
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="portofolio-text">
-                                <p>Onklas is a company that makes one stop solution for school management system. It's products include student registration management, payment management, presence management, book management, etc.</p>
-                                <p>
-                                    <strong>Role :</strong> Backend developer
-                                    <br>
-                                    <strong>Responsibilities :</strong> Develop RESTful APIs for new or existing product. Add more features to a product as requested. Fix bugs found on a product. Create or modify database for a product.
-                                    <br>
-                                    <strong>Languages :</strong> PHP.
-                                    <br>
-                                    <strong>Frameworks/Libs :</strong> Laravel.
-                                    <br>
-                                    <strong>Other technologies :</strong> MySql.
-                                    <br>
-                                    <strong>Status :</strong> Internal project. Is online. Under the NDA.
-                                    <br>
-                                    <a href="https://onklas.id/">https://onklas.id/</a>
-                                </p>
-                            </div>
                         </div>
-                    </div>
-                    <div class="mb-4">
-                        <h2 class="heading">The Edge Singapore</h2>
-                        <hr>
-                        <div class="responsive-flex p-3">
-                            <div class="portofolio-img mb-4">
-                                <img src="/img/theedgesingapore.jpg" alt="the edge singapore" @click="toggleModal">
-                            </div>
-                            <div class="portofolio-text">
-                                <p>The Edge Singapore is a product owned by someone in Edgeprop.sg at the time I was there. The Edge Singapore, TES for short, is an news publication website. There is also a mobile app version of it. It uses drupal as its Content Management System. It uses module feature, which is like wordpress plugin, to customize the website as desired. My job usually takes place around making or modifying custom module to add more feature in the website such as creating a custom import function.</p>
-                                <p>
-                                    <strong>Role :</strong> Backend engineer
-                                    <br>
-                                    <strong>Responsibilities :</strong> Maintain the main website’s system to be free of bugs. Add more features to the website as requested. Participate in development and maintenance for company web application using drupal.
-                                    <br>
-                                    <strong>Languages :</strong> PHP.
-                                    <br>
-                                    <strong>Frameworks/Libs :</strong> Drupal.
-                                    <br>
-                                    <strong>Other technologies :</strong> MySql.
-                                    <br>
-                                    <strong>Status :</strong> Is online.
-                                    <br>
-                                    <a href="https://www.theedgesingapore.com/">https://www.theedgesingapore.com/</a>
-                                </p>
-                            </div>
+                    </template>
+                    <template v-else>
+                        <div class="mb-4">
+                            <h2 class="text-danger">Could not fetch data</h2>
                         </div>
-                    </div>
+                    </template>
                     <div class="mb-4">
-                        <hr>
-                        <h1 class="heading">Personal / Freelance Projects</h1>
+                        <h1>Personal Projects</h1>
                         <hr>
                     </div>
-                    <div class="mb-4">
-                        <h2 class="heading">Wix API Integration with Wix App</h2>
-                        <hr>
-                        <div class="responsive-flex p-3">
-                            <div class="portofolio-img">
-                                <img src="/img/WixApp.jpg" alt="wix app integration" @click="toggleModal">
-                                <div class="gallery mt-3">
-                                    <img class="image-popup" src="/img/WixManageAppPage.jpg" alt="wix app integration" @click="toggleModal">
-                                    <img class="image-popup" src="/img/WixAppProduct.jpg" alt="wix app integration" @click="toggleModal">
-                                    <img class="image-popup" src="/img/WixAppProductMedia.jpg" alt="wix app integration" @click="toggleModal">
-                                    <img class="image-popup" src="/img/WixProduct.jpg" alt="wix app integration" @click="toggleModal">
+                    <template v-if="dataReceived">
+                        <div v-for="portofolio in personal_portofolios" :key="portofolio.id" class="mb-4">
+                            <h2 class="heading">{{ portofolio.title }}</h2>
+                            <hr>
+                            <div class="responsive-flex p-3">
+                                <div class="portofolio-img">
+                                    <template v-if="portofolio.portofolio_images.length">
+                                        <img :src="portofolio.portofolio_images[0].image_url" alt="{{portofolio.alt}}" @click="toggleModal">
+                                    </template>
+                                    <div class="gallery mt-3">
+                                        <template v-for="(image,key,data_index) in portofolio.portofolio_images" :key="data_index">
+                                            <img v-if="image.index > 1" class="image-popup" :src="image.image_url" :alt="image.alt" @click="toggleModal">
+                                        </template>
+                                    </div>
+                                    <div v-if="portofolio.nda" class="text-center mt-4 mb-4">
+                                        <h5>* Internal project. Under the NDA</h5>
+                                    </div>
+                                </div>
+                                <div class="portofolio-text">
+                                    <p>{{portofolio.description}}</p>
+                                    <p>
+                                        <span v-for="(detail_item,detail_key,detail_index) in portofolio.detail" :key="detail_index">
+                                            <strong>{{detail_key}} :</strong> <a target="_blank" v-if="detail_key=='Link'" :href="detail_item">{{detail_item}}</a> <span v-else>{{detail_item}}</span>
+                                            <br>
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="portofolio-text">
-                                <p>This is a freelance job I got to integrate Wix API to the user's website. The user want to be able to manage his products in his own database and wixsite from one place. Wix API uses OAuth 2.0 as authentication for the APIs. The website itself uses native PHP.</p>
-                                <p>
-                                    <strong>Role :</strong> Full-stack Developer
-                                    <br>
-                                    <strong>Responsibilities :</strong> Integrate Wix API with the website.
-                                    <br>
-                                    <strong>Languages :</strong> PHP.
-                                    <br>
-                                    <strong>Frameworks/Libs :</strong> Wix API, Guzzle.
-                                    <br>
-                                    <strong>Other technologies :</strong> MySql, OAtuh 2.0
-                                    <br>
-                                    <strong>Status :</strong> Is online. Private wix app.
-                                    <br>
-                                </p>
-                            </div>
                         </div>
-                    </div>
+                    </template>
+                    <template v-else>
+                        <div>
+                            <h2 class="text-danger">Could not fetch data</h2>
+                        </div>
+                    </template>
                 </div>
             </section>
         </div>
@@ -141,7 +121,19 @@ export default {
             showModal: false,
             imgSrc:"",
             imgAlt:"",
+            company_portofolios:[],
+            personal_portofolios:[],
+            dataReceived:true
         }
+    },
+    mounted(){
+        fetch(import.meta.env.VITE_ROOT_API+'/portofolio')
+            .then((res) => res.json())
+            .then(data => {
+                this.company_portofolios = data.company_portofolios;
+                this.personal_portofolios = data.personal_portofolios;
+            })
+            .catch(err => this.dataReceived = false)
     },
     methods:{
         toggleModal: function(e){
