@@ -26,23 +26,21 @@
                         <h1>Companies Projects</h1>
                         <hr>
                     </div>
-                    <template v-if="dataReceived">
+                    <template v-if="dataReceived === null">
+                        <Loading />
+                    </template>
+                    <template v-else-if="dataReceived === false">
+                        <div>
+                            <h2 class="text-danger">Could not fetch data</h2>
+                        </div>
+                    </template>
+                    <template v-else>
                         <div v-for="portofolio in company_portofolios" :key="portofolio.id" class="mb-4">
                             <h2 class="heading">{{ portofolio.title }}</h2>
                             <hr>
                             <div class="responsive-flex p-3">
                                 <div class="portofolio-img">
-                                    <template v-if="portofolio.portofolio_images.length">
-                                        <img :src="portofolio.portofolio_images[0].image_url" alt="{{portofolio.alt}}" @click="toggleModal">
-                                    </template>
-                                    <div class="gallery mt-3">
-                                        <template v-for="(image,key,data_index) in portofolio.portofolio_images" :key="data_index">
-                                            <img v-if="image.index > 1" class="image-popup" :src="image.image_url" :alt="image.alt" @click="toggleModal">
-                                        </template>
-                                    </div>
-                                    <div v-if="portofolio.nda" class="text-center mt-4 mb-4">
-                                        <h5>* Internal project. Under the NDA</h5>
-                                    </div>
+                                    <PortofolioImageList :portofolioImages="portofolio.portofolio_images" :ndaStatus="portofolio.nda" :portofolioId="portofolio.id" :showModal="this.showModal" @imageClicked="imageClicked"/>
                                 </div>
                                 <div class="portofolio-text">
                                     <p>{{portofolio.description}}</p>
@@ -54,34 +52,27 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
-                    </template>
-                    <template v-else>
-                        <div class="mb-4">
-                            <h2 class="text-danger">Could not fetch data</h2>
                         </div>
                     </template>
                     <div class="mb-4">
                         <h1>Personal Projects</h1>
                         <hr>
                     </div>
-                    <template v-if="dataReceived">
+                    <template v-if="dataReceived === null">
+                        <Loading />
+                    </template>
+                    <template v-else-if="dataReceived === false">
+                        <div>
+                            <h2 class="text-danger">Could not fetch data</h2>
+                        </div>
+                    </template>
+                    <template v-else>
                         <div v-for="portofolio in personal_portofolios" :key="portofolio.id" class="mb-4">
                             <h2 class="heading">{{ portofolio.title }}</h2>
                             <hr>
                             <div class="responsive-flex p-3">
                                 <div class="portofolio-img">
-                                    <template v-if="portofolio.portofolio_images.length">
-                                        <img :src="portofolio.portofolio_images[0].image_url" alt="{{portofolio.alt}}" @click="toggleModal">
-                                    </template>
-                                    <div class="gallery mt-3">
-                                        <template v-for="(image,key,data_index) in portofolio.portofolio_images" :key="data_index">
-                                            <img v-if="image.index > 1" class="image-popup" :src="image.image_url" :alt="image.alt" @click="toggleModal">
-                                        </template>
-                                    </div>
-                                    <div v-if="portofolio.nda" class="text-center mt-4 mb-4">
-                                        <h5>* Internal project. Under the NDA</h5>
-                                    </div>
+                                    <PortofolioImageList :portofolioImages="portofolio.portofolio_images" :ndaStatus="portofolio.nda" :portofolioId="portofolio.id" :showModal="this.showModal" @imageClicked="imageClicked"/>
                                 </div>
                                 <div class="portofolio-text">
                                     <p>{{portofolio.description}}</p>
@@ -93,11 +84,6 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
-                    </template>
-                    <template v-else>
-                        <div>
-                            <h2 class="text-danger">Could not fetch data</h2>
                         </div>
                     </template>
                 </div>
@@ -110,11 +96,15 @@
 import NavLinks from "./NavLinks.vue";
 import SocialLinks from "./SocialLinks.vue";
 import ImageModal from "./ImageModal.vue";
+import PortofolioImageList from "./PortofolioImageList.vue";
+import Loading from "./Loading.vue";
 export default {
     components: {
         NavLinks,
         SocialLinks,
-        ImageModal
+        ImageModal,
+        PortofolioImageList,
+        Loading
     },
     data (){
         return {
@@ -123,7 +113,7 @@ export default {
             imgAlt:"",
             company_portofolios:[],
             personal_portofolios:[],
-            dataReceived:true
+            dataReceived:null
         }
     },
     mounted(){
@@ -132,14 +122,15 @@ export default {
             .then(data => {
                 this.company_portofolios = data.company_portofolios;
                 this.personal_portofolios = data.personal_portofolios;
+                this.dataReceived = true;
             })
             .catch(err => this.dataReceived = false)
     },
     methods:{
-        toggleModal: function(e){
-            this.showModal = !this.showModal;
-            this.imgSrc = e.currentTarget.getAttribute('src');
-            this.imgAlt = e.currentTarget.getAttribute('alt');
+        imageClicked: function(e){
+            this.showModal = e.showModal;
+            this.imgSrc = e.imgSrc;
+            this.imgAlt = e.imgAlt;
         }
     }
 }
@@ -179,40 +170,12 @@ export default {
         padding: 1em;
         text-align: center;
     }
-    .logo img{
-        width: 45%;
-        max-width: 350px;
-    }
-    .portofolio-text{
-        width: 100%;
-        word-wrap: break-word;
-    }
-    .portofolio-img{
-        width: 100%;
-        text-align: center;
-    }
-    .portofolio-img img{
-        width: 70%;
-        border-radius: 0.5rem;
-        filter: drop-shadow(0 0 0.25rem black);
-    }
     .responsive-flex{
         display: flex;
         flex-direction: column;
     }
     .page-body .heading{
         text-align: center;
-    }
-    .image-popup{
-        flex: 1;
-        flex-basis: 30%;
-        margin: 5px;
-        max-width: 30%;
-    }
-    .gallery{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
     }
     @media (min-width:1200px) {
         .side-nav{
@@ -228,22 +191,54 @@ export default {
             display: flex;
             flex-direction: row;
         }
-        .portofolio-text{
-            width: 50%;
-            padding-left: 1rem;
-            word-wrap: break-word;
-        }
-        .portofolio-img{
-            width: 50%;
-            padding-right: 1.5rem;
-        }
-        .portofolio-img img{
-            width: 100%;
-            border-radius: 0.5rem;
-            filter: drop-shadow(0 0 0.25rem black);
-        }
         .page-body .heading{
             text-align: left;
         }
     }
+</style>
+<style>
+.logo img{
+    width: 45%;
+    max-width: 350px;
+}
+.portofolio-text{
+    width: 100%;
+    word-wrap: break-word;
+}
+.portofolio-img{
+    width: 100%;
+    text-align: center;
+}
+.portofolio-img img{
+    width: 70%;
+    border-radius: 0.5rem;
+    filter: drop-shadow(0 0 0.25rem black);
+}
+.image-popup{
+    flex: 1;
+    flex-basis: 30%;
+    margin: 5px;
+    max-width: 30%;
+}
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+@media (min-width:1200px) {
+    .portofolio-text{
+        width: 50%;
+        padding-left: 1rem;
+        word-wrap: break-word;
+    }
+    .portofolio-img{
+        width: 50%;
+        padding-right: 1.5rem;
+    }
+    .portofolio-img img{
+        width: 100%;
+        border-radius: 0.5rem;
+        filter: drop-shadow(0 0 0.25rem black);
+    }
+}
 </style>
